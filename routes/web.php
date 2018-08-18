@@ -94,7 +94,17 @@ Route::view(
 Route::get(
     '/hellonome/{nome}/{sn}', 
     function($nome, $sn) {
-        
+
+        return view(
+            'hellonome', 
+            ['nome'=>$nome, 'sn'=> $sn]
+        );
+});
+
+Route::get(
+    '/hellobrasil/{nome}/{sn}', 
+    function($nome, $sn) {
+        // retorna a view hellonome
         return view(
             'hellonome', 
             ['nome'=>$nome, 'sn'=> $sn]
