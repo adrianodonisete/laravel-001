@@ -1,0 +1,50 @@
+# v2 syntax
+version: '2'
+
+# Named volumes
+volumes:
+  # MySQL Data
+  app-laravel-01-mysql-data:
+    driver: local
+
+services:
+  # MySQL (5.7)
+  mysql:
+    image: ambientum/mysql:5.7
+    container_name: app-laravel-01-mysql
+    volumes:
+      - app-laravel-01-mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=app-laravel-01
+      - MYSQL_DATABASE=app-laravel-01
+      - MYSQL_USER=app-laravel-01
+      - MYSQL_PASSWORD=app-laravel-01
+
+  # PHP (with Caddy)
+  app:
+    image: ambientum/php:7.1-caddy
+    container_name: app-laravel-01-app
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "80:8080"
+    links:
+      - mysql
+
+  # phpMyAdmin 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: app-laravel-01-phpmyadmin
+    hostname: phpmyadmin
+    domainname: lara01myadmin.com
+    environment:
+      - PMA_ARBITRARY=1
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
+    links:
+      - mysql
