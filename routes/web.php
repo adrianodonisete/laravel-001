@@ -19,6 +19,15 @@ Route::get('/hello', function () {
 
 
 
+Route::get('/primeiraview', function() {
+    return view('minhaview');
+});
+
+
+
+/*
+
+
 Route::get('/nome', 'MeuControlador@getNome');
 
 Route::get('/idade', 'MeuControlador@getIdade');
@@ -27,7 +36,9 @@ Route::get('/multiplicar/{n1}/{n2}', 'MeuControlador@multiplicar');
 
 Route::get('/nomes/{id}', 'MeuControlador@getNomeByID');
 
+Route::resource('/cliente', 'ClienteControlador');
 
+*/
 
 
 /*
