@@ -6,8 +6,7 @@
 
 <body>
 
-    <h1> Hello, {{$nome}} {{$sobrenome}}</h1>
-
+<h1> Hello, {{$email}}</h1>
 
 </body>
 

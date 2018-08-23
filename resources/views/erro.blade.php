@@ -6,7 +6,7 @@
 
 <body>
 
-    <h1> Hello, {{$nome}} {{$sobrenome}}</h1>
+    <h1> Esta View não existe</h1>
 
 
 </body>
