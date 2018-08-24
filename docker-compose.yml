@@ -13,7 +13,8 @@ services:
     image: ambientum/mysql:5.7
     container_name: app-laravel-01-mysql
     volumes:
-      - app-laravel-01-mysql-data:/var/lib/mysql
+      - ./data-mysql:/var/lib/mysql
+      #- app-laravel-01-mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
