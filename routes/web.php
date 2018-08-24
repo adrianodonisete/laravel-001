@@ -60,6 +60,12 @@ Route::get('/filho', function() {
 });
 
 
+
+Route::get('/produtos', 'ProdutoControlador@listar');
+
+Route::get('/secaoprodutos/{palavra}', 'ProdutoControlador@secaoprodutos');
+
+
 /*
 
 
