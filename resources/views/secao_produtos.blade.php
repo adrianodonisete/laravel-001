@@ -4,4 +4,4 @@
     @if(isset($palavra))
         <b>Palavra: {{$palavra}}</b>
     @endif
-@endsection
+@endsection 

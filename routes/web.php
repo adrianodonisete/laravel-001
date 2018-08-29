@@ -9,6 +9,24 @@ Route::get('/', function () {
     return view('pagina');
 });
 
+
+
+
+
+
+
+
+
+
+
+/*
+
+Route::get('/', function () {
+    return view('pagina');
+});
+
+
+
 Route::get('/ola/sejabemvindo', function () {
     return view('welcome');
 });
@@ -31,20 +49,16 @@ Route::get('/ola', function() {
 });
 
 Route::get('/ola/{nome}/{sobrenome}', function($nome, $sobrenome) {
-    /*return view('minhaview')
-        ->with('nome', $nome)
-        ->with('sobrenome', $sobrenome);
-        */
-        
-        /*return view('minhaview', 
-            ['nome' => $nome, 'sobrenome'=> $sobrenome]
-        );*/
+    
+    
 
         return view('minhaview', 
             compact('nome', 'sobrenome')
         );
 });
+*/
 
+/*
 
 Route::get('/email/{email}', function($email) {
     if (View::exists('email')) {
@@ -61,12 +75,15 @@ Route::get('/filho', function() {
 
 
 
+
+Route::get('/mostraropcoes', 'ProdutoControlador@mostrar_opcoes');
+Route::get('/opcoes/{opcao}', 'ProdutoControlador@opcoes');
+
+
 Route::get('/produtos', 'ProdutoControlador@listar');
 
 Route::get('/secaoprodutos/{palavra}', 'ProdutoControlador@secaoprodutos');
 
-
-/*
 
 
 Route::get('/nome', 'MeuControlador@getNome');
