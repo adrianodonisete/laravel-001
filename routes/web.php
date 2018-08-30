@@ -1,9 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 
-
-////////////////////////////////////////////////////////////////
-// Basico de Rotas
 
 Route::get('/', function () {
     return view('pagina');
@@ -11,6 +9,84 @@ Route::get('/', function () {
 
 
 
+
+Route::get('/categorias', function () {
+
+
+    $cats = DB::table('categorias')->get();
+
+    foreach($cats as $c) {
+        echo 'id: ', $c->id, '; ';
+        echo 'nome: ', $c->nome, '<br /> ';
+    }
+
+    echo    '<hr />';
+
+    $nomes = DB::table('categorias')->pluck('nome');
+
+    foreach($nomes as $nome) {
+        echo 'Nome: ', $nome, '<br /> ';
+    }
+
+
+    echo    '<hr />';
+
+    $cats = DB::table('categorias')->where('id', '2')->get();
+
+    foreach($cats as $c) {
+        echo 'id: ', $c->id, '; ';
+        echo 'nome: ', $c->nome, '<br /> ';
+    }
+
+    echo    '<hr />';
+
+    $cat = DB::table('categorias')->where('id', '4')->first();
+    echo 'id: ', $cat->id, '; ';
+    echo 'nome: ', $cat->nome, '<br /> ';
+
+    
+    echo    '<hr />';
+    echo    '<p>Retorna um array utilizando like</p>';
+
+    $cats = DB::table('categorias')->where('nome', 'like', 'p%')->get();
+
+    foreach($cats as $c) {
+        echo 'id: ', $c->id, '; ';
+        echo 'nome: ', $c->nome, '<br /> ';
+    }
+
+    
+    echo    '<hr />';
+    echo    '<p>Sentenças lógicas</p>';
+
+    $cats = DB::table('categorias')->where('id', 1)->orWhere('id', 2)->get();
+
+    foreach($cats as $c) {
+        echo 'id: ', $c->id, '; ';
+        echo 'nome: ', $c->nome, '<br /> ';
+    }
+
+    echo    '<p>Intervalos</p>';
+
+    $cats = DB::table('categorias')->whereBetween('id', [1,3])->get();
+
+    foreach($cats as $c) {
+        echo 'id: ', $c->id, '; ';
+        echo 'nome: ', $c->nome, '<br /> ';
+    }
+
+    echo    '<p>Sentenças lógicas</p>';
+    $cats = DB::table('categorias')->where([
+        ['id', 2],
+        ['nome', 'Roupas']
+    ])->get();
+
+    foreach($cats as $c) {
+        echo 'id: ', $c->id, '; ';
+        echo 'nome: ', $c->nome, '<br /> ';
+    }
+    //return view('welcome');
+});
 
 
 
