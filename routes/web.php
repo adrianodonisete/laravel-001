@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
+//use Illuminate\Support\Facades\DB;
+use App\Categoria;
 
 
 Route::get('/', function () {
@@ -9,6 +10,9 @@ Route::get('/', function () {
 
 
 
+
+
+/*
 
 Route::get('/categorias', function () {
 
@@ -91,8 +95,51 @@ Route::get('/categorias', function () {
 
 
 
+Route::get('/novascategorias', function () {
+    $id = DB::table('categorias')->insertGetId(
+        ['nome' => 'Caminhoes']
+    );
+
+    echo "Novo ID: {$id}";
+});
+
+Route::get('/atualizandocategorias', function () {
+    $cat = DB::table('categorias')->where('id', '4')->first();
+    echo '<br />Antes';
+    echo 'id: ', $cat->id, '; ';
+    echo 'nome: ', $cat->nome, '<br /> ';
+
+    $cat = DB::table('categorias')->where('id', '4')
+        ->update(['nome'=>'Roupas infantis']);
+
+    $cat = DB::table('categorias')->where('id', '4')->first();
+    echo '<br />Depois';
+    echo 'id: ', $cat->id, '; ';
+    echo 'nome: ', $cat->nome, '<br /> ';
+});
 
 
+
+Route::get('/removendocategorias', function () {
+    $cats = DB::table('categorias')->get();
+    echo '<br />Antes';
+    foreach($cats as $c) {
+        echo 'id: ', $c->id, '; ';
+        echo 'nome: ', $c->nome, '<br /> ';
+    }
+
+    $cat = DB::table('categorias')->where('id', '4')->delete();
+
+    $cats = DB::table('categorias')->get();
+    echo '<br />Depois';
+    foreach($cats as $c) {
+        echo 'id: ', $c->id, '; ';
+        echo 'nome: ', $c->nome, '<br /> ';
+    }
+});
+
+
+*/
 
 
 /*
