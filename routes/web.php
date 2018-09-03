@@ -5,11 +5,70 @@ use App\Categoria;
 
 
 Route::get('/', function () {
-    return view('pagina');
+    return view('index');    
 });
 
 
 
+
+/*
+
+Route::get('/', function () {
+    //return view('pagina');
+
+    $catetoria = Categoria::all();
+
+    //echo 'teste';
+
+    foreach($catetoria as $c) {
+        echo 'id: ', $c->id, '; ';
+        echo 'nome: ', $c->nome, '<br /> ';
+    }
+});
+
+
+
+
+Route::get('/inserir/{nome}', function ($nome) {
+
+    $cat = new Categoria();
+    $cat->nome = $nome;
+    $cat->save();
+
+    return redirect('/');
+});
+
+
+Route::get('/atualizar/{id}/{nome}', function ($id, $nome) {
+
+    $cat = Categoria::find($id);
+    $cat->nome = $nome;
+    $cat->save();
+
+    return redirect('/');
+});
+
+Route::get('/remover/{id}', function ($id) {
+
+    $cat = Categoria::find($id);
+    $cat->delete();
+
+    return redirect('/');
+});
+
+
+Route::get('/todas', function () {
+
+    $catetoria = Categoria::withTrashed()->get();
+
+
+    foreach($catetoria as $c) {
+        echo 'id: ', $c->id, '; ';
+        echo 'nome: ', $c->nome, ' ';
+        echo $c->trashed() ? '; apagado<br />' : '<br />';
+    }
+});
+*/
 
 
 /*
