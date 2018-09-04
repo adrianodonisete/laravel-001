@@ -10,7 +10,7 @@
     @show
 
     <div>
-        @yield('conteudo')
+        @yield('conteudo') 
 
     </div>
 
