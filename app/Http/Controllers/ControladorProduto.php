@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Produto;
+use App\Categoria;
+
 class ControladorProduto extends Controller
 {
     /**
@@ -13,7 +16,16 @@ class ControladorProduto extends Controller
      */
     public function index()
     {
-        //
+        $cats = Categoria::all();
+        $arr_cats = [];
+
+        foreach($cats as $cat) {
+            $arr_cats[$cat->id] = $cat->nome;
+        }
+
+
+        $prods = Produto::all();
+        return view('produtos', compact('prods'), compact('arr_cats')); // TODO pegar o nome da categoria
     }
 
     /**
@@ -23,7 +35,8 @@ class ControladorProduto extends Controller
      */
     public function create()
     {
-        
+        $cats = Categoria::all();
+        return view('novoproduto', compact('cats'));
     }
 
     /**
@@ -33,8 +46,18 @@ class ControladorProduto extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {        
+        if ($request->input('nomeProduto') == '') {
+            return redirect('/produtos');
+        }
+
+        $prod = new Produto();
+        $prod->nome = $request->input('nomeProduto');
+        $prod->preco = $request->input('preco');
+        $prod->estoque = $request->input('estoque');
+        $prod->categoria_id = $request->input('categoria_id');
+        $prod->save();
+        return redirect('/produtos');
     }
 
     /**
@@ -56,7 +79,12 @@ class ControladorProduto extends Controller
      */
     public function edit($id)
     {
-        //
+        $cats = Categoria::all();
+        $prod = Produto::find($id);
+        if(isset($prod)) {
+            return view('editarproduto', compact('prod'), compact('cats'));
+        }
+        return redirect('/produtos');
     }
 
     /**
@@ -68,7 +96,15 @@ class ControladorProduto extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $prod = Produto::find($id);
+        if(isset($prod)) {
+            $prod->nome = $request->input('nomeProduto');
+            $prod->preco = $request->input('preco');
+            $prod->estoque = $request->input('estoque');
+            $prod->categoria_id = $request->input('categoria_id');
+            $prod->save();
+        }
+        return redirect('/produtos');
     }
 
     /**
@@ -79,6 +115,10 @@ class ControladorProduto extends Controller
      */
     public function destroy($id)
     {
-        //
+        $prod = Produto::find($id);
+        if (isset($prod)) {
+            $prod->delete();
+        }
+        return redirect('/produtos');
     }
 }
