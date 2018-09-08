@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cliente;
 
 class ClienteControlador extends Controller
 {
@@ -13,7 +14,8 @@ class ClienteControlador extends Controller
      */
     public function index()
     {
-        return "Lista de todos os Clientes - Raiz";
+        $clientes = Cliente::all();
+        return view ('clientes', compact('clientes'));
     }
 
     /**
@@ -23,7 +25,7 @@ class ClienteControlador extends Controller
      */
     public function create()
     {
-        return "Formulário para Cadastrar novo Cliente";
+        return view ('novocliente');
     }
 
     /**
@@ -34,12 +36,26 @@ class ClienteControlador extends Controller
      */
     public function store(Request $request)
     {
-        
-        $s = "Armazenar: ";
-        $s .= "Nome: ".$request->input('nome')." e ";
-        $s .= "Idade: ".$request->input('idade')." ";
+        $request->validate([
+            'nome' => 'required|min:3|max:20|unique:clientes',
+            'idade' => 'required',
+            'endereco' => 'required|min:5',
+            'email' => 'required|email',
+        ], [
+            'required' => 'O campo :attribute é obrigatório'
+        ]);
 
-        return response($s, 201);
+        $cliente = new Cliente();
+        $cliente->nome = $request->input('nome');
+        $cliente->idade = $request->input('idade');
+        $cliente->endereco = $request->input('endereco');
+        $cliente->email = $request->input('email');
+        $cliente->save();
+            
+
+        return view ('novocliente', compact('cliente'));
+
+        //return response($s, 201);
     }
 
     /**
