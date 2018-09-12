@@ -4,10 +4,10 @@ echo Uploading Application container
 docker-compose up -d
 
 echo Copying the configuration example file
-docker exec -it app-laravel-01-app cp .env.example .env
+docker exec -it app-laravel-01-app sudo cp .env.example .env
 
 echo Install dependencies
-docker exec -it app-laravel-01-app composer install
+docker exec -it app-laravel-01-app sudo composer install
 
 echo Generate key
 docker exec -it app-laravel-01-app php artisan key:generate

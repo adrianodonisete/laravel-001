@@ -24,26 +24,54 @@
               
               <div class="form-group">
                 <label for="nome">Nome do Cliente</label>
-                <input type="text" class="form-control" name="nome"  
+                <input type="text" name="nome" 
+                       class="form-control {{ $errors->has('nome') ? 'is-invalid' : '' }}" 
                        id="nome" placeholder="Nome do Cliente">
+
+                    @if($errors->has('nome'))
+                        <div class="invalid-feedback">
+                        {{ $errors->first('nome') }}
+                        </div>
+                    @endif
               </div>
 
-              <div class="form-group">
+                <div class="form-group">
                 <label for="idade">Idade do Cliente</label>
-                <input type="number" class="form-control" name="idade"  
-                       id="idade" placeholder="Idade do Cliente">
-              </div>
-              
-              <div class="form-group">
-                <label for="endereco">Endereço do Cliente</label>
-                <input type="text" class="form-control" name="endereco"  
-                       id="endereco" placeholder="Endereço do Cliente">
-              </div>
+                <input type="number" 
+                       class="form-control {{ $errors->has('idade') ? 'is-invalid' : '' }}" 
+                       name="idade" id="idade" placeholder="Idade do Cliente">
 
-              <div class="form-group">
-                <label for="endereco">Email</label>
-                <input type="text" class="form-control" name="email"
-                       id="email" placeholder="E-mail do Cliente">
+                    @if($errors->has('idade'))
+                        <div class="invalid-feedback">
+                        {{ $errors->first('idade') }}
+                        </div>
+                    @endif
+                </div>
+              
+                <div class="form-group">
+                    <label for="endereco">Endereço do Cliente</label>
+                    <input type="text" 
+                        class="form-control {{ $errors->has('endereco') ? 'is-invalid' : '' }}" 
+                        name="endereco" id="endereco" placeholder="Endereço do Cliente">
+
+                    @if($errors->has('endereco'))
+                        <div class="invalid-feedback">
+                        {{ $errors->first('endereco') }}
+                        </div>
+                    @endif
+                </div>
+
+                <div class="form-group">
+                    <label for="endereco">Email</label>
+                    <input type="text" 
+                           class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" 
+                           name="email" id="email" placeholder="E-mail do Cliente">
+
+                    @if($errors->has('email'))
+                        <div class="invalid-feedback">
+                        {{ $errors->first('email') }}
+                        </div>
+                    @endif
               </div>
 
               <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
@@ -52,30 +80,12 @@
           </div>
 
 
-  @if(isset($errors))
-          <div class="card-footer">
-        @foreach($errors->all() as $error) 
-            <div class="alert alert-danger" role="alert">
-                {{ $error }}
-            </div>
-        @endforeach
-          </div>    
-  @endif
-
-  @if(isset($cliente))
-  {{ $cliente->nome }}
-  @endif
-
-
         </div>
       </div>
     </div>
   </main>
 
 
-  @if(isset($errors))
-    {{ var_dump($errors) }}
-  @endif
 
   <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 
