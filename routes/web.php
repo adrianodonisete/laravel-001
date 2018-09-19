@@ -36,6 +36,8 @@ Route::get('/desenvolvedor_projetos', function () {
         }
         echo "<hr>";
     }
+
+    //$desenvolvedores = Desenvolvedor::all();
     //return $desenvolvedores->toJson();
 });
 
